@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-1">
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="2">Rank</th>
+						<th>Title</th>
+						<th>Year</th>
+						<th>Ratings</th>
+						<th>Votes</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for movie in movies %}
+					<tr>
+						<td style="vertical-align: middle;">{{ movie.rank }}</td>
+						<td style="vertical-align: middle;">
+							<img src="{{ movie.imgURL }}" alt="{{ movie.title }}" />
+						</td>
+						<td style="vertical-align: middle;">
+							<a href="{{ movie.link }}" target="_blank">
+								{{ movie.title }}
+							</a>
+						</td>
+						<td style="vertical-align: middle;">{{ movie.year }}</td>
+						<td style="vertical-align: middle;">{{ movie.rating }}</td>
+						<td style="vertical-align: middle;">{{ movie.votes }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

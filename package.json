@@ -1,0 +1,22 @@
+{
+  "name": "scrape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.1",
+    "body-parser": "^1.15.2",
+    "cheerio": "^0.22.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "morgan": "^1.7.0",
+    "nunjucks": "^2.5.2",
+    "request": "^2.75.0"
+  }
+}
