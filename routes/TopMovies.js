@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 				year: $(this).find(".titleColumn > span").text(),
 				rating:  + ($(this).find(".ratingColumn.imdbRating > strong").text()), 
 				votes: $(this).find(".ratingColumn.imdbRating > strong").attr("title").split("on")[1].split("user")[0].trim(),
-				link: (BASE + $(this).find(".titleColumn > a").attr("href").split("?")[0]),
+				link: ($(this).find(".titleColumn > a").attr("href").split("?")[0].split("/title")[1]),
 				imgURL: $(this).find(".posterColumn").find("a > img").attr("src")
 			}
 			movies.push(movie)

@@ -4,36 +4,33 @@ var cheerio = require('cheerio');
 var fs = require('fs');
 var router = express.Router();
 
-var BASE = 'http://www.imdb.com'
+var BASE = 'http://www.imdb.com/title/'
 
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
-	console.log(req.params.id)
-/*	request.get(BASE+'/chart/top', function(err, result, body){
+	request.get(BASE+req.params.id, function(err, result, body){
+		var movie = {}
 		var $ = cheerio.load(body)
-		var links = $(".lister-list > tr").map(function(i){
-			var movie = {
-				rank: (movies.length + 1),
-				title: $(this).find(".titleColumn > a").text(),
-				year: $(this).find(".titleColumn > span").text(),
-				rating:  + ($(this).find(".ratingColumn.imdbRating > strong").text()), 
-				votes: $(this).find(".ratingColumn.imdbRating > strong").attr("title").split("on")[1].split("user")[0].trim(),
-				link: (BASE + $(this).find(".titleColumn > a").attr("href").split("?")[0]),
-				imgURL: $(this).find(".posterColumn").find("a > img").attr("src")
-			}
-			movies.push(movie)
-		}).get();	
-		fs.writeFile('scrap.json', JSON.stringify(movies),  function(err) {
+		movie.title = $('.title_wrapper > h1').text().trim()
+		movie.description = $(".summary_text[itemprop='description']").text().trim()
+		movie.creators = {
+			director : $($(".credit_summary_item  [itemprop='director']")).text().trim(),
+			writer : $($(".credit_summary_item  [itemprop='creator']")).text().trim(),
+			actors: $($(".credit_summary_item  [itemprop='actors']")).text().trim()
+		}
+		movie.poster = $(".poster img").attr("src")
+/*		fs.writeFile('scrap.json', JSON.stringify(title),  function(err) {
 			if (err) {
 				return console.error(err);
 			}
 		})*/
 
-	res.render('movie', {
-		title: "movie title"
-	})
-/*	}) */
+		res.render('movie', {
+			title: movie.title,
+			movie: movie
+		})
 
+	})
 })
 
 module.exports = router;
